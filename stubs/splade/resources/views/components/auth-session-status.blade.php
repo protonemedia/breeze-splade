@@ -1,7 +1,3 @@
-@props(['status'])
-
-@if ($status)
-    <div {{ $attributes->merge(['class' => 'font-medium text-sm text-green-600']) }}>
-        {{ $status }}
-    </div>
-@endif
+<x-splade-flash>
+    <div v-if="flash.has('status')" v-text="flash.status" {{ $attributes->merge(['class' => 'font-medium text-sm text-green-600']) }} />
+</x-splade-flash>
