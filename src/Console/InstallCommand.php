@@ -11,14 +11,14 @@ use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
 {
-    use InstallsApiStack, InstallsBladeStack, InstallsInertiaStacks;
+    use InstallsApiStack, InstallsBladeStack, InstallsInertiaStacks, InstallsSpladeStack;
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'breeze:install {stack=blade : The development stack that should be installed (blade,react,vue,api)}
+    protected $signature = 'breeze:install {stack=splade : The development stack that should be installed (blade,react,vue,api,splade)}
                             {--inertia : Indicate that the Vue Inertia stack should be installed (Deprecated)}
                             {--pest : Indicate that Pest should be installed}
                             {--ssr : Indicates if Inertia SSR support should be installed}
@@ -46,6 +46,8 @@ class InstallCommand extends Command
             return $this->installApiStack();
         } elseif ($this->argument('stack') === 'blade') {
             return $this->installBladeStack();
+        } elseif ($this->argument('stack') === 'splade') {
+            return $this->installSpladeStack();
         }
 
         $this->components->error('Invalid stack. Supported stacks are [blade], [react], [vue], and [api].');
@@ -67,11 +69,11 @@ class InstallCommand extends Command
         if ($this->option('pest')) {
             $this->requireComposerPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
 
-            (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Feature', base_path('tests/Feature/Auth'));
-            (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Unit', base_path('tests/Unit'));
-            (new Filesystem)->copy(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Pest.php', base_path('tests/Pest.php'));
+            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Feature', base_path('tests/Feature/Auth'));
+            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Unit', base_path('tests/Unit'));
+            (new Filesystem)->copy(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Pest.php', base_path('tests/Pest.php'));
         } else {
-            (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/tests/Feature', base_path('tests/Feature/Auth'));
+            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/tests/Feature', base_path('tests/Feature/Auth'));
         }
     }
 
@@ -88,12 +90,12 @@ class InstallCommand extends Command
         $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
 
         $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['), '];');
-        $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
+        $middlewareGroup  = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
 
         if (! Str::contains($middlewareGroup, $name)) {
             $modifiedMiddlewareGroup = str_replace(
-                $after.',',
-                $after.','.PHP_EOL.'            '.$name.',',
+                $after . ',',
+                $after . ',' . PHP_EOL . '            ' . $name . ',',
                 $middlewareGroup,
             );
 
@@ -157,7 +159,7 @@ class InstallCommand extends Command
 
         file_put_contents(
             base_path('package.json'),
-            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
         );
     }
 
@@ -213,12 +215,12 @@ class InstallCommand extends Command
             try {
                 $process->setTty(true);
             } catch (RuntimeException $e) {
-                $this->output->writeln('  <bg=yellow;fg=black> WARN </> '.$e->getMessage().PHP_EOL);
+                $this->output->writeln('  <bg=yellow;fg=black> WARN </> ' . $e->getMessage() . PHP_EOL);
             }
         }
 
         $process->run(function ($type, $line) {
-            $this->output->write('    '.$line);
+            $this->output->write('    ' . $line);
         });
     }
 }
