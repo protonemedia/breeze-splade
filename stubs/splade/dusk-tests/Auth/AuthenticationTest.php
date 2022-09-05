@@ -21,20 +21,6 @@ class AuthenticationTest extends DuskTestCase
         });
     }
 
-    public function test_users_can_authenticate_using_the_login_screen()
-    {
-        $this->browse(function (Browser $browser) {
-            $user = User::factory()->create();
-
-            $browser->visit('/login')
-                ->type('email', $user->email)
-                ->type('password', 'password')
-                ->press('Log in')
-                ->waitForLocation(RouteServiceProvider::HOME)
-                ->assertAuthenticatedAs($user);
-        });
-    }
-
     public function test_users_can_not_authenticate_with_invalid_password()
     {
         $this->browse(function (Browser $browser) {
@@ -46,6 +32,20 @@ class AuthenticationTest extends DuskTestCase
                 ->press('Log in')
                 ->waitForText('These credentials do not match our records.')
                 ->assertGuest();
+        });
+    }
+
+    public function test_users_can_authenticate_using_the_login_screen()
+    {
+        $this->browse(function (Browser $browser) {
+            $user = User::factory()->create();
+
+            $browser->visit('/login')
+                ->type('email', $user->email)
+                ->type('password', 'password')
+                ->press('Log in')
+                ->waitForLocation(RouteServiceProvider::HOME)
+                ->assertAuthenticatedAs($user);
         });
     }
 }

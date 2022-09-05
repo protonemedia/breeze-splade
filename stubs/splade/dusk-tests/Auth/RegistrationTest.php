@@ -18,7 +18,7 @@ class RegistrationTest extends DuskTestCase
                 ->assertInputPresent('name')
                 ->assertInputPresent('email')
                 ->assertInputPresent('password')
-                ->assertInputPresent('confirmation');
+                ->assertInputPresent('password_confirmation');
         });
     }
 
