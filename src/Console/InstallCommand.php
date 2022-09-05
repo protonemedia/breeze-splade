@@ -76,7 +76,7 @@ class InstallCommand extends Command
         }
 
         if ($this->option('pest')) {
-            $this->requireComposerPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
+            $this->requireComposerPackages(['pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1']);
 
             if (! $spladeStack) {
                 (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Feature', base_path('tests/Feature/Auth'));
@@ -96,7 +96,7 @@ class InstallCommand extends Command
      */
     protected function installDusk()
     {
-        $this->requireComposerPackages('laravel/dusk', 'protonemedia/laravel-dusk-fakes');
+        $this->requireComposerPackages(['laravel/dusk', 'protonemedia/laravel-dusk-fakes'], true);
 
         (new Process([$this->phpBinary(), 'artisan', 'dusk:install'], base_path()))
             ->setTimeout(null)
