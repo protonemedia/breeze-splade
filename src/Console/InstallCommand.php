@@ -50,7 +50,7 @@ class InstallCommand extends Command
             return $this->installSpladeStack();
         }
 
-        $this->components->error('Invalid stack. Supported stacks are [blade], [react], [vue], and [api].');
+        $this->components->error('Invalid stack. Supported stacks are [blade], [react], [vue], [api], and [splade].');
 
         return 1;
     }
@@ -70,20 +70,22 @@ class InstallCommand extends Command
 
         if ($spladeStack) {
             $this->installDusk();
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/splade/dusk-tests/Auth', base_path('tests/Browser'));
+            (new Filesystem)->ensureDirectoryExists(base_path('tests/Browser/Auth'));
+            (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/splade/dusk-tests/Auth', base_path('tests/Browser/Auth'));
+            (new Filesystem)->copy(__DIR__.'/../../stubs/splade/dusk-tests/.env.dusk', base_path('.env.dusk'));
         }
 
         if ($this->option('pest')) {
             $this->requireComposerPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
 
-            if (!$spladeStack) {
-                (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Feature', base_path('tests/Feature/Auth'));
+            if (! $spladeStack) {
+                (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Feature', base_path('tests/Feature/Auth'));
             }
 
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Unit', base_path('tests/Unit'));
-            (new Filesystem)->copy(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Pest.php', base_path('tests/Pest.php'));
-        } elseif (!$spladeStack) {
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/tests/Feature', base_path('tests/Feature/Auth'));
+            (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Unit', base_path('tests/Unit'));
+            (new Filesystem)->copy(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Pest.php', base_path('tests/Pest.php'));
+        } elseif (! $spladeStack) {
+            (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/tests/Feature', base_path('tests/Feature/Auth'));
         }
     }
 
@@ -116,12 +118,12 @@ class InstallCommand extends Command
         $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
 
         $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['), '];');
-        $middlewareGroup  = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
+        $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
 
         if (! Str::contains($middlewareGroup, $name)) {
             $modifiedMiddlewareGroup = str_replace(
-                $after . ',',
-                $after . ',' . PHP_EOL . '            ' . $name . ',',
+                $after.',',
+                $after.','.PHP_EOL.'            '.$name.',',
                 $middlewareGroup,
             );
 
@@ -187,7 +189,7 @@ class InstallCommand extends Command
 
         file_put_contents(
             base_path('package.json'),
-            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
         );
     }
 
@@ -243,12 +245,12 @@ class InstallCommand extends Command
             try {
                 $process->setTty(true);
             } catch (RuntimeException $e) {
-                $this->output->writeln('  <bg=yellow;fg=black> WARN </> ' . $e->getMessage() . PHP_EOL);
+                $this->output->writeln('  <bg=yellow;fg=black> WARN </> '.$e->getMessage().PHP_EOL);
             }
         }
 
         $process->run(function ($type, $line) {
-            $this->output->write('    ' . $line);
+            $this->output->write('    '.$line);
         });
     }
 }
