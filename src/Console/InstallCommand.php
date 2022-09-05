@@ -66,15 +66,41 @@ class InstallCommand extends Command
 
         $stubStack = $this->argument('stack') === 'api' ? 'api' : 'default';
 
+        $spladeStack = $this->argument('stack') === 'splade';
+
+        if ($spladeStack) {
+            $this->installDusk();
+            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/splade/dusk-tests/Auth', base_path('tests/Browser'));
+        }
+
         if ($this->option('pest')) {
             $this->requireComposerPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
 
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Feature', base_path('tests/Feature/Auth'));
+            if (!$spladeStack) {
+                (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Feature', base_path('tests/Feature/Auth'));
+            }
+
             (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Unit', base_path('tests/Unit'));
             (new Filesystem)->copy(__DIR__ . '/../../stubs/' . $stubStack . '/pest-tests/Pest.php', base_path('tests/Pest.php'));
-        } else {
+        } elseif (!$spladeStack) {
             (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/' . $stubStack . '/tests/Feature', base_path('tests/Feature/Auth'));
         }
+    }
+
+    /**
+     * Install Laravel Dusk.
+     *
+     * @return void
+     */
+    protected function installDusk()
+    {
+        $this->requireComposerPackages('laravel/dusk', 'protonemedia/laravel-dusk-fakes');
+
+        (new Process([$this->phpBinary(), 'artisan', 'dusk:install'], base_path()))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
     }
 
     /**
@@ -111,9 +137,10 @@ class InstallCommand extends Command
      * Installs the given Composer Packages into the application.
      *
      * @param  mixed  $packages
+     * @param  bool  $dev
      * @return void
      */
-    protected function requireComposerPackages($packages)
+    protected function requireComposerPackages($packages, $dev = false)
     {
         $composer = $this->option('composer');
 
@@ -123,6 +150,7 @@ class InstallCommand extends Command
 
         $command = array_merge(
             $command ?? ['composer', 'require'],
+            $dev ? ['--dev'] : [],
             is_array($packages) ? $packages : func_get_args()
         );
 
