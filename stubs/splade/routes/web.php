@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('splade')->group(function () {
+    // Registers routes to support Table Bulk Actions and Exports...
     Route::spladeTable();
 
     Route::get('/', function () {
@@ -26,5 +27,5 @@ Route::middleware('splade')->group(function () {
         })->name('dashboard');
     });
 
-    require __DIR__.'/auth.php';
+    require __DIR__ . '/auth.php';
 });
