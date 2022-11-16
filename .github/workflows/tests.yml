@@ -1,0 +1,67 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - master
+      - '*.x'
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  stub-tests:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: true
+      matrix:
+        stack: [blade, react, vue, api]
+        args: [null, --pest]
+        include:
+          - stack: vue
+            args: --ssr
+          - stack: react
+            args: --ssr
+
+    name: Test Stubs - ${{ matrix.stack }} ${{ matrix.args }}
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Setup Laravel
+        run: |
+          composer create-project laravel/laravel:^9 .
+          composer require laravel/breeze:* --no-interaction --no-update
+          composer config repositories.breeze '{"type": "path", "url": "breeze"}' --file composer.json
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: 'breeze'
+
+      - name: Install Breeze
+        run: |
+          composer update "laravel/breeze" --prefer-dist --no-interaction --no-progress -W
+          php artisan breeze:install ${{ matrix.stack }} ${{ matrix.args }}
+
+      - name: Install NPM dependencies
+        if: matrix.stack != 'api'
+        run: npm i
+
+      - name: Compile assets
+        if: matrix.stack != 'api'
+        run: npm run build
+
+      - name: Execute tests
+        run: ${{ matrix.args == '--pest' && 'vendor/bin/pest' || 'vendor/bin/phpunit' }} --verbose
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ":memory:"

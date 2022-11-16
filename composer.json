@@ -31,7 +31,7 @@
         "protonemedia/laravel-splade": "^0.7.0"
     },
     "conflict": {
-        "laravel/framework": "<9.19.0"
+        "laravel/framework": "<9.37.0"
     },
     "autoload": {
         "psr-4": {
