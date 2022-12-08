@@ -57,14 +57,11 @@ trait InstallsSpladeStack
         (new Filesystem)->ensureDirectoryExists(resource_path('views'));
         (new Filesystem)->copyDirectory($spladeBreezeStubsDir.'resources/views', resource_path('views'));
 
-        if (! $this->option('dark')) {
-            $this->removeDarkClasses(
-                (new Finder)
-                    ->in(resource_path('views'))
-                    ->name('*.blade.php')
-                    ->notName('welcome.blade.php')
-            );
-        }
+        $this->removeDarkClasses(
+            (new Finder)
+                ->in(resource_path('views'))
+                ->name('*.blade.php')
+        );
 
         copy($spladeBreezeStubsDir.'resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
         copy($spladeBreezeStubsDir.'resources/views/root.blade.php', resource_path('views/root.blade.php'));

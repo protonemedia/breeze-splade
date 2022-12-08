@@ -47,6 +47,11 @@ jobs:
           composer dump
           php artisan breeze:install
           php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+          ls -la
+          cd app/Http/Controllers
+          ls -la
+          cd Auth
+          ls -la
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
