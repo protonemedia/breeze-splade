@@ -52,7 +52,7 @@ class PasswordResetTest extends DuskTestCase
 
             Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
                 $this->browse(function (Browser $browser) use ($notification, $user) {
-                    $browser->visit('/reset-password/' . $notification->token . '?email=' . $user->email)
+                    $browser->visit('/reset-password/'.$notification->token.'?email='.$user->email)
                         ->assertInputValue('email', $user->email);
                 });
 
@@ -74,7 +74,7 @@ class PasswordResetTest extends DuskTestCase
 
             Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
                 $this->browse(function (Browser $browser) use ($notification, $user) {
-                    $browser->visit('/reset-password/' . $notification->token . '?email=' . $user->email)
+                    $browser->visit('/reset-password/'.$notification->token.'?email='.$user->email)
                         ->assertInputValue('email', $user->email)
                         ->type('password', 'password')
                         ->type('password_confirmation', 'password')
