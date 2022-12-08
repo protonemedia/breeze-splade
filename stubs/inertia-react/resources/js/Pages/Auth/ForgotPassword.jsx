@@ -1,4 +1,3 @@
-import React from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -33,7 +32,8 @@ export default function ForgotPassword({ status }) {
 
             <form onSubmit={submit}>
                 <TextInput
-                    type="text"
+                    id="password"
+                    type="email"
                     name="email"
                     value={data.email}
                     className="mt-1 block w-full"

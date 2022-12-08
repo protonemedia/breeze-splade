@@ -1,6 +1,29 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/breeze/compare/v1.15.1...1.x)
+## [Unreleased](https://github.com/laravel/breeze/compare/v1.15.4...1.x)
+
+## [v1.15.4](https://github.com/laravel/breeze/compare/v1.15.3...v1.15.4) - 2022-12-05
+
+### Changed
+
+- Use Default NPM Package Manager of User if Lock File Exists In Base Path by @andrewdwallo in https://github.com/laravel/breeze/pull/224
+
+## [v1.15.3](https://github.com/laravel/breeze/compare/v1.15.2...v1.15.3) - 2022-11-28
+
+### Fixed
+
+- Fix-psr-4-warning by @Kamona-WD in https://github.com/laravel/breeze/pull/221
+- Status must be String by @marsuboss in https://github.com/laravel/breeze/pull/219
+- Fix close modal with escape keydown and cleanup import react by @fouteox in https://github.com/laravel/breeze/pull/218
+
+## [v1.15.2](https://github.com/laravel/breeze/compare/v1.15.1...v1.15.2) - 2022-11-21
+
+### Fixed
+
+- Fix closing tag by @kaozaza2 in https://github.com/laravel/breeze/pull/213
+- Vue code formatting by @jessarcher in https://github.com/laravel/breeze/pull/212
+- React formatting by @fouteox in https://github.com/laravel/breeze/pull/214
+- Add missing translation methods to Blade stack by @jessarcher in https://github.com/laravel/breeze/pull/215
 
 ## [v1.15.1](https://github.com/laravel/breeze/compare/v1.15.0...v1.15.1) - 2022-11-15
 
