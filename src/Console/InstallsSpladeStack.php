@@ -47,11 +47,11 @@ trait InstallsSpladeStack
 
         // Controllers...
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers'));
-        (new Filesystem)->copyDirectory($defaultStubsDir.'App/Http/Controllers', app_path('Http/Controllers'));
+        (new Filesystem)->copyDirectory($defaultStubsDir.'app/Http/Controllers', app_path('Http/Controllers'));
 
         // Requests...
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
-        (new Filesystem)->copyDirectory($defaultStubsDir.'App/Http/Requests', app_path('Http/Requests'));
+        (new Filesystem)->copyDirectory($defaultStubsDir.'app/Http/Requests', app_path('Http/Requests'));
 
         // Views...
         (new Filesystem)->ensureDirectoryExists(resource_path('views'));
@@ -69,7 +69,7 @@ trait InstallsSpladeStack
 
         // Components...
         (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
-        (new Filesystem)->copyDirectory($defaultStubsDir.'App/View/Components', app_path('View/Components'));
+        (new Filesystem)->copyDirectory($defaultStubsDir.'app/View/Components', app_path('View/Components'));
 
         // Tests...
         $this->installTests();
