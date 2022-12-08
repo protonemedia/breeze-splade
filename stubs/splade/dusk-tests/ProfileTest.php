@@ -31,6 +31,7 @@ class ProfileTest extends DuskTestCase
                 ->visit('/profile')
                 ->within('@update-profile-information', function (Browser $browser) {
                     $browser->type('name', 'Test User')
+                        ->pause(500)
                         ->type('email', 'test@example.com')
                         ->press('Save')
                         ->waitForText('Saved');
@@ -53,6 +54,7 @@ class ProfileTest extends DuskTestCase
                 ->visit('/profile')
                 ->within('@update-profile-information', function (Browser $browser) use ($user) {
                     $browser->type('name', 'Test User')
+                        ->pause(500)
                         ->type('email', $user->email)
                         ->press('Save')
                         ->waitForText('Saved');
