@@ -30,7 +30,7 @@ trait InstallsSpladeStack
                 '@tailwindcss/typography' => '^0.5.2',
                 '@vitejs/plugin-vue' => '^3.0.0',
                 'autoprefixer' => '^10.4.12',
-                'laravel-vite-plugin' => '^0.5.0',
+                'laravel-vite-plugin' => '^0.7.0',
                 'postcss' => '^8.4.18',
                 'tailwindcss' => '^3.2.1',
                 'vite' => '^3.0.0',
