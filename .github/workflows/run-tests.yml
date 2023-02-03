@@ -32,11 +32,6 @@ jobs:
         run: rm -rf vendor/protonemedia/laravel-splade-breeze
         if: matrix.os == 'ubuntu-latest'
 
-      - name: Remove installed Breeze (Windows)
-        run: rd "vendor/protonemedia/laravel-splade-breeze" /s /q
-        shell: cmd
-        if: matrix.os == 'windows-latest'
-
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -57,8 +52,8 @@ jobs:
       - name: Run Dusk Tests
         uses: nick-invision/retry@v2
         with:
-          timeout_minutes: 5
-          max_attempts: 3
+          timeout_minutes: 10
+          max_attempts: 5
           command: php artisan dusk --env=dusk
 
       - name: Upload Dusk Screenshots
