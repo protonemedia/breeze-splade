@@ -35,6 +35,7 @@ trait InstallsSpladeStack
                 'tailwindcss' => '^3.2.1',
                 'vite' => '^3.0.0',
                 'vue' => '^3.2.41',
+                'tailwindcss-rtl' => '^0.9.0'
             ] + $packages;
         });
 
@@ -43,7 +44,7 @@ trait InstallsSpladeStack
 
         $defaultStubsDir = __DIR__.'/../../stubs/default/';
         $spladeBreezeStubsDir = __DIR__.'/../../stubs/splade/';
-        $spladeBaseStubsDir = base_path('vendor/protonemedia/laravel-splade/stubs/');
+        $spladeBaseStubsDir = base_path('packages/splade/laravel-splade/stubs/');
 
         // Controllers...
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers'));

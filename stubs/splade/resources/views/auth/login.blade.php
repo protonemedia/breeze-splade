@@ -11,7 +11,7 @@
 
             <div class="flex items-center justify-end">
                 @if (Route::has('password.request'))
-                    <Link class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100" href="{{ route('password.request') }}">
+                    <Link class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-300" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </Link>
                 @endif

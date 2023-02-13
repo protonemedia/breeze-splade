@@ -12,4 +12,6 @@
     <main>
         {{ $slot }}
     </main>
+
+    @include('components.script')
 </div>
