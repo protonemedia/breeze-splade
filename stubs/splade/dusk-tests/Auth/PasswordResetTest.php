@@ -33,7 +33,7 @@ class PasswordResetTest extends DuskTestCase
                 ->visit('/forgot-password')
                 ->type('email', $user->email)
                 ->press('Email Password Reset Link')
-                ->waitForText('We have emailed your password reset link!');
+                ->waitForText('We have emailed your password reset link');
 
             Notification::assertSentTo($user, ResetPassword::class);
         });
@@ -48,7 +48,7 @@ class PasswordResetTest extends DuskTestCase
                 ->visit('/forgot-password')
                 ->type('email', $user->email)
                 ->press('Email Password Reset Link')
-                ->waitForText('We have emailed your password reset link!');
+                ->waitForText('We have emailed your password reset link');
 
             Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
                 $this->browse(function (Browser $browser) use ($notification, $user) {
@@ -71,7 +71,7 @@ class PasswordResetTest extends DuskTestCase
                 ->waitForText('Forgot your password?')
                 ->type('email', $user->email)
                 ->press('Email Password Reset Link')
-                ->waitForText('We have emailed your password reset link!');
+                ->waitForText('We have emailed your password reset link');
 
             Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
                 $this->browse(function (Browser $browser) use ($notification, $user) {
@@ -80,7 +80,7 @@ class PasswordResetTest extends DuskTestCase
                         ->type('password', 'password')
                         ->type('password_confirmation', 'password')
                         ->press('Reset Password')
-                        ->waitForText('Your password has been reset!')
+                        ->waitForText('Your password has been reset')
                         ->assertPathIs('/login');
                 });
 

@@ -25,7 +25,7 @@ trait InstallsSpladeStack
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@protonemedia/laravel-splade' => '^1.2.9',
+                '@protonemedia/laravel-splade' => '^1.2.15',
                 '@tailwindcss/forms' => '^0.5.3',
                 '@tailwindcss/typography' => '^0.5.2',
                 '@vitejs/plugin-vue' => '^3.0.0',
@@ -104,7 +104,6 @@ trait InstallsSpladeStack
     /**
      * Remove Tailwind dark classes from the given files.
      *
-     * @param  \Symfony\Component\Finder\Finder  $finder
      * @return void
      */
     protected function removeDarkClasses(Finder $finder)
