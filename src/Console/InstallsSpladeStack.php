@@ -104,7 +104,6 @@ trait InstallsSpladeStack
     /**
      * Remove Tailwind dark classes from the given files.
      *
-     * @param  \Symfony\Component\Finder\Finder  $finder
      * @return void
      */
     protected function removeDarkClasses(Finder $finder)
