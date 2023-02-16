@@ -28,15 +28,16 @@ jobs:
       - name: Setup Laravel
         run: |
           composer create-project laravel/laravel:^${{ matrix.laravel }} .
-          composer require protonemedia/laravel-splade-breeze
+          composer require protonemedia/laravel-splade
+          composer require laravel/breeze
 
       - name: Remove installed Breeze
-        run: rm -rf vendor/protonemedia/laravel-splade-breeze
+        run: rm -rf vendor/laravel/breeze
 
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          path: "vendor/protonemedia/laravel-splade-breeze"
+          path: "vendor/laravel/breeze"
 
       - name: Install Breeze and Setup Dusk environment
         run: |
