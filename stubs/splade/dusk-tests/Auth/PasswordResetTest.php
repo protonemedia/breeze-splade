@@ -80,7 +80,7 @@ class PasswordResetTest extends DuskTestCase
                         ->type('password', 'password')
                         ->type('password_confirmation', 'password')
                         ->press('Reset Password')
-                        ->waitForText('Your password has been reset!')
+                        ->waitForText('Your password has been reset')
                         ->assertPathIs('/login');
                 });
 
