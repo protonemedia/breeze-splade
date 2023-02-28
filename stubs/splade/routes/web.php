@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('splade')->group(function () {
+    // Registers routes to support the interactive components...
+    Route::spladeWithVueBridge();
+
     // Registers routes to support password confirmation in Form and Link components...
     Route::spladePasswordConfirmation();
 
