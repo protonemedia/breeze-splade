@@ -28,12 +28,12 @@ trait InstallsSpladeStack
                 '@protonemedia/laravel-splade' => '^1.3.0',
                 '@tailwindcss/forms' => '^0.5.3',
                 '@tailwindcss/typography' => '^0.5.2',
-                '@vitejs/plugin-vue' => '^3.0.0',
+                '@vitejs/plugin-vue' => '^4.0.0',
                 'autoprefixer' => '^10.4.12',
-                'laravel-vite-plugin' => '^0.5.0',
+                'laravel-vite-plugin' => '^0.7.5',
                 'postcss' => '^8.4.18',
-                'tailwindcss' => '^3.2.1',
-                'vite' => '^3.0.0',
+                'tailwindcss' => '^3.3.0',
+                'vite' => '^4.0.0',
                 'vue' => '^3.2.41',
             ] + $packages;
         });
