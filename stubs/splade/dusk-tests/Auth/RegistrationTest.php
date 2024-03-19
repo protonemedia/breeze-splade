@@ -35,7 +35,7 @@ class RegistrationTest extends DuskTestCase
                 ->type('password', 'password')
                 ->type('password_confirmation', 'password')
                 ->press('Register')
-                ->waitForLocation(RouteServiceProvider::HOME)
+                ->waitForLocation('/dashboard')
                 ->assertAuthenticated();
         });
     }
