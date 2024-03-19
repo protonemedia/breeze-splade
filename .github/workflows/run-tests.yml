@@ -9,8 +9,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [8.2, 8.1]
-        laravel: [10.2]
+        php: [8.3, 8.2]
+        laravel: [11.0, 10.2]
 
     name: Test Stubs P${{ matrix.php }} - L${{ matrix.laravel }}
 
