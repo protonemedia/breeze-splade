@@ -34,15 +34,15 @@ trait InstallsSpladeStack
         $this->updateNodePackages(function ($packages) {
             return [
                 '@protonemedia/laravel-splade' => '^1.4.18',
-                '@tailwindcss/forms'           => '^0.5.7',
-                '@tailwindcss/typography'      => '^0.5.10',
-                '@vitejs/plugin-vue'           => '^5.0',
-                'autoprefixer'                 => '^10.4.16',
-                'laravel-vite-plugin'          => '^1.0',
-                'postcss'                      => '^8.4.32',
-                'tailwindcss'                  => '^3.4',
-                'vite'                         => '^5.0',
-                'vue'                          => '^3.4',
+                '@tailwindcss/forms' => '^0.5.7',
+                '@tailwindcss/typography' => '^0.5.10',
+                '@vitejs/plugin-vue' => '^5.0',
+                'autoprefixer' => '^10.4.16',
+                'laravel-vite-plugin' => '^1.0',
+                'postcss' => '^8.4.32',
+                'tailwindcss' => '^3.4',
+                'vite' => '^5.0',
+                'vue' => '^3.4',
             ] + $packages;
         });
 

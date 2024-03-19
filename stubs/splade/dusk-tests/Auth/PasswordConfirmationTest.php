@@ -3,7 +3,6 @@
 namespace Tests\Browser\Auth;
 
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
