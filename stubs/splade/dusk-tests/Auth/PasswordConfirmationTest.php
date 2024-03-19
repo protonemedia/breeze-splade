@@ -34,8 +34,8 @@ class PasswordConfirmationTest extends DuskTestCase
                 ->waitForText('Please confirm your password before continuing.')
                 ->type('password', 'password')
                 ->press('Confirm')
-                ->waitForLocation(RouteServiceProvider::HOME)
-                ->assertPathIs(RouteServiceProvider::HOME);
+                ->waitForLocation('/dashboard')
+                ->assertPathIs('/dashboard');
         });
     }
 

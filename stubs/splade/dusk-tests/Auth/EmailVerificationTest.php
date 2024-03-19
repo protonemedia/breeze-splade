@@ -43,7 +43,7 @@ class EmailVerificationTest extends DuskTestCase
             $browser->loginAs($user)
                 ->visit($verificationUrl)
                 ->waitForText('You\'re logged in!')
-                ->assertPathIs(RouteServiceProvider::HOME)
+                ->assertPathIs('/dashboard')
                 ->assertQueryStringHas('verified', 1);
 
             $this->assertTrue($user->fresh()->hasVerifiedEmail());

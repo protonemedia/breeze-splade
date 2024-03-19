@@ -34,7 +34,7 @@ class AuthenticationTest extends DuskTestCase
                 ->type('email', $user->email)
                 ->type('password', 'password')
                 ->press('Log in')
-                ->waitForLocation(RouteServiceProvider::HOME)
+                ->waitForLocation('/dashboard')
                 ->assertAuthenticatedAs($user);
         });
     }

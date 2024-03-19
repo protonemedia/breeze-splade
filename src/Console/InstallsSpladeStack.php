@@ -33,16 +33,16 @@ trait InstallsSpladeStack
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@protonemedia/laravel-splade' => '^1.4.8',
-                '@tailwindcss/forms' => '^0.5.3',
-                '@tailwindcss/typography' => '^0.5.2',
-                '@vitejs/plugin-vue' => '^4.0.0',
-                'autoprefixer' => '^10.4.12',
-                'laravel-vite-plugin' => '^0.7.5',
-                'postcss' => '^8.4.18',
-                'tailwindcss' => '^3.3.0',
-                'vite' => '^4.0.0',
-                'vue' => '^3.2.41',
+                '@protonemedia/laravel-splade' => '^1.4.18',
+                '@tailwindcss/forms'           => '^0.5.7',
+                '@tailwindcss/typography'      => '^0.5.10',
+                '@vitejs/plugin-vue'           => '^5.0',
+                'autoprefixer'                 => '^10.4.16',
+                'laravel-vite-plugin'          => '^1.0',
+                'postcss'                      => '^8.4.32',
+                'tailwindcss'                  => '^3.4',
+                'vite'                         => '^5.0',
+                'vue'                          => '^3.4',
             ] + $packages;
         });
 
@@ -85,9 +85,6 @@ trait InstallsSpladeStack
         // Routes...
         copy($spladeBreezeStubsDir.'routes/web.php', base_path('routes/web.php'));
         copy($spladeBreezeStubsDir.'routes/auth.php', base_path('routes/auth.php'));
-
-        // "Dashboard" Route...
-        $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
 
         // Tailwind / Vite...
         copy($spladeBaseStubsDir.'tailwind.config.js', base_path('tailwind.config.js'));
