@@ -33,7 +33,7 @@ trait InstallsSpladeStack
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@protonemedia/laravel-splade' => '^1.4.18',
+                '@protonemedia/laravel-splade' => '^1.4.16',
                 '@tailwindcss/forms' => '^0.5.7',
                 '@tailwindcss/typography' => '^0.5.10',
                 '@vitejs/plugin-vue' => '^5.0',
