@@ -49,7 +49,7 @@ jobs:
         run: php artisan serve &
 
       - name: Run Dusk Tests
-        uses: nick-invision/retry@v2
+        uses: nick-invision/retry@v3
         with:
           timeout_minutes: 10
           max_attempts: 5
